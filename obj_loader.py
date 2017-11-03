@@ -1,15 +1,21 @@
-# obj file data data loader
-# will create an object of obj class
-#methods
-#source_file_name="C:/Users/antono2/Google Drive/houdiniEssentials/orient_box.obj"
+# obj file loader
 
 from OpenGL.GL import *
 class obj_loader:
+    """
+
+    OBJ models loader, supports vertices ages and polygons
+    Does not support UV or curves yet
+    """
     def __init__(self,obj_file_name):
+        """
+
+        :param obj_file_name: obj format model file name
+        :type obj_file_name: string
+        """
         import os
         if os.access(obj_file_name, os.R_OK):
             with open(obj_file_name,"r") as obj_file:
-                #main code here
                 #read components
                 self.vertexes=[]
                 self.lines=[]
@@ -32,9 +38,10 @@ class obj_loader:
 
 
     def draw(self):
-        #print "verts:", len(self.vertices)
-        #print "lines:", len(self.lines)
-        #print "faces:", len(self.faces)
+        """
+
+        GL draw commands
+        """
         if len(self.vertexes)>0:
             if len(self.lines)>0:
                 glBegin(GL_LINES)

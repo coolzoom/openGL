@@ -1,10 +1,20 @@
 from OpenGL.GL import *
 class Gnomon(object):
+
     """simple 3 axis colored gnomon to check viewport orientation"""
+
     def __init__(self):
+        """
+
+        Vertex and lines data
+        """
         self.vertices = ((0, 0, 0),(1, 0, 0),(0, 1, 0),(0, 0, 1))
         self.edges=(0,1),(0,2),(0,3)
     def draw(self):
+        """
+
+        GL calls to draw gnomon
+        """
         glColor3f(1.0, 0.0, 0.0)
         glBegin(GL_LINES)
         for vertex in self.edges[0]:
