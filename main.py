@@ -2,10 +2,11 @@
 # Loading and displaying *.obj 3d object
 #
 
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtOpenGL import *
+from PyQt5.QtOpenGL import *
 
 # obj format file loader
 from obj_loader import *
@@ -84,7 +85,7 @@ class oglWidget(QGLWidget):
         glClear(GL_COLOR_BUFFER_BIT)
 
 
-class Window(QtGui.QWidget):
+class Window(QtWidgets.QWidget):
     """Application main window"""
 
     def __init__(self):
@@ -99,53 +100,53 @@ class Window(QtGui.QWidget):
 
         # Create layout
         # top level vertical
-        self.layout_vbox_L0 = QtGui.QVBoxLayout(self)
+        self.layout_vbox_L0 = QtWidgets.QVBoxLayout(self)
         self.layout_vbox_L0.setContentsMargins(5, 0, 5, 5)
         # horisontal layout for OGL controls group and OGL window
-        self.layout_hbox_L1 = QtGui.QHBoxLayout()
+        self.layout_hbox_L1 = QtWidgets.QHBoxLayout()
 
         # OGL controls group
-        self.ogl_controls_group = QtGui.QGroupBox("OGL controls box")
+        self.ogl_controls_group = QtWidgets.QGroupBox("OGL controls box")
 
         # vertical layout inside OGL controls group
-        self.layout_vbox_L2 = QtGui.QVBoxLayout()
+        self.layout_vbox_L2 = QtWidgets.QVBoxLayout()
         self.ogl_controls_group.setLayout(self.layout_vbox_L2)
 
         # OGL controls
-        ogl_contols_rotateLabel = QtGui.QLabel("Rotate x y z:")
+        ogl_contols_rotateLabel = QtWidgets.QLabel("Rotate x y z:")
         self.layout_vbox_L2.addWidget(ogl_contols_rotateLabel)
-        self.ogl_contols_rotateX = QtGui.QSlider()
+        self.ogl_contols_rotateX = QtWidgets.QSlider()
         self.ogl_contols_rotateX.setOrientation(QtCore.Qt.Horizontal)
         self.layout_vbox_L2.addWidget(self.ogl_contols_rotateX)
         self.ogl_contols_rotateX.valueChanged.connect(self.orientationChanged)
-        self.ogl_contols_rotateY = QtGui.QSlider()
+        self.ogl_contols_rotateY = QtWidgets.QSlider()
         self.ogl_contols_rotateY.setOrientation(QtCore.Qt.Horizontal)
         self.layout_vbox_L2.addWidget(self.ogl_contols_rotateY)
         self.ogl_contols_rotateY.valueChanged.connect(self.orientationChanged)
-        self.ogl_contols_rotateZ = QtGui.QSlider()
+        self.ogl_contols_rotateZ = QtWidgets.QSlider()
         self.ogl_contols_rotateZ.setOrientation(QtCore.Qt.Horizontal)
         self.layout_vbox_L2.addWidget(self.ogl_contols_rotateZ)
         self.ogl_contols_rotateZ.valueChanged.connect(self.orientationChanged)
-        self.ogl_controls_texturedCheckBox = QtGui.QCheckBox("Textured")
+        self.ogl_controls_texturedCheckBox = QtWidgets.QCheckBox("Textured")
         self.layout_vbox_L2.addWidget(self.ogl_controls_texturedCheckBox)
 
         self.layout_hbox_L1.addWidget(self.ogl_controls_group)
         self.layout_hbox_L1.addWidget(self.oglwidget)
 
         # menu bar
-        self.menuBar = QtGui.QMenuBar(self)
-        self.fileOpenAction = QtGui.QAction('&Open', self)
+        self.menuBar = QtWidgets.QMenuBar(self)
+        self.fileOpenAction = QtWidgets.QAction('&Open', self)
         self.fileOpenAction.triggered.connect(self.openPyFile)
-        self.exitAction = QtGui.QAction('&Exit', self)
+        self.exitAction = QtWidgets.QAction('&Exit', self)
         self.exitAction.triggered.connect(self.close_application)
         self.fileMenu = self.menuBar.addMenu('&File')
         self.fileMenu.addAction(self.fileOpenAction)
         self.fileMenu.addAction(self.exitAction)
 
         # status bar
-        self.statusBarLabel = QtGui.QLabel()
+        self.statusBarLabel = QtWidgets.QLabel()
         self.statusBarLabel.setText(self.helpLine)
-        self.statusBar = QtGui.QStatusBar(self)
+        self.statusBar = QtWidgets.QStatusBar(self)
         self.statusBar.addWidget(self.statusBarLabel)
         self.statusBar.setMaximumHeight(100)
         self.statusBar.setMaximumWidth(600)
@@ -214,7 +215,7 @@ class Window(QtGui.QWidget):
         :return: none
         :rtype: none
         """
-        self.fileName = QtGui.QFileDialog.getOpenFileName(self, 'OpenFile')
+        self.fileName = QtWidgets.QFileDialog.getOpenFileName(self, 'OpenFile')
         self.oglwidget.model = obj_loader(self.fileName)
         self.statusBarLabel.setText((self.helpLine + "\nmodel:" + self.fileName))
         self.oglwidget.glDraw()
@@ -230,7 +231,7 @@ class Window(QtGui.QWidget):
 
 
 if __name__ == "__main__":
-    app = QtGui.QApplication([])
+    app = QApplication([])
     window = Window()
     window.show()
 

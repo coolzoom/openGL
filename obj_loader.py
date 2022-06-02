@@ -67,11 +67,11 @@ if __name__=="__main__":
 
     model=obj_loader("C:/Users/antono2/Google Drive/houdiniEssentials/orient_box.obj")
 
-    print "Vertex array:", "length:" , len(model.vertexes)
-    print model.vertexes
+    print ("Vertex array:", "length:" , len(model.vertexes))
+    print (model.vertexes)
 
-    print "Lines array:", "length:" , len(model.lines)
-    print model.lines
+    print ("Lines array:", "length:" , len(model.lines))
+    print (model.lines)
 
-    print "Faces array:", "length:" , len(model.faces)
-    print model.faces
+    print ("Faces array:", "length:" , len(model.faces))
+    print (model.faces)
