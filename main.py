@@ -215,10 +215,18 @@ class Window(QtWidgets.QWidget):
         :return: none
         :rtype: none
         """
-        self.fileName = QtWidgets.QFileDialog.getOpenFileName(self, 'OpenFile')
-        self.oglwidget.model = obj_loader(self.fileName)
-        self.statusBarLabel.setText((self.helpLine + "\nmodel:" + self.fileName))
-        self.oglwidget.glDraw()
+        dialog = QFileDialog()
+        dialog.setFileMode(QFileDialog.AnyFile)
+        dialog.setViewMode(QFileDialog.Detail)
+        dialog.setNameFilter("Model File (*.obj)")
+        # dialog.setDirectory(configurationSubdir)
+
+        if dialog.exec_():
+            self.fileName = dialog.selectedFiles()[0].strip()
+            # self.fileName = QtWidgets.QFileDialog.getOpenFileName(self, 'OpenFile')
+            self.oglwidget.model = obj_loader(self.fileName)
+            self.statusBarLabel.setText((self.helpLine + "\nmodel:" + self.fileName))
+            self.oglwidget.glDraw()
 
     def close_application(self):
         """
